@@ -1,4 +1,4 @@
-package com.cemcoma.rps.rpsSystems;
+
 
 public class elo {
     private int elo1, elo2;
@@ -10,7 +10,7 @@ public class elo {
         this.didP1Win = didP1Win;
         finalizeElos();
     }
-
+// deneme2
     private void finalizeElos() {
         //TODO: finalze elo1 & elo2
         // 400 400 -> 0 / 20 = 10
@@ -26,7 +26,7 @@ public class elo {
                 elo2 -= eloFark;
             }
             else if(elo1 > elo2 && didP1Win == -1){
-                int eloFark = (elo1 - elo2)/50;
+                int eloFark = (elo1 - elo2)/150;
                 elo1 -= eloFark;
                 elo2 += eloFark;
 
@@ -42,7 +42,7 @@ public class elo {
                 elo1 -= eloFark;
             }
             else if(elo2 > elo1 && didP1Win == -1){
-                int eloFark = (elo1 - elo2)/50;
+                int eloFark = (elo1 - elo2)/150;
                 elo2 += eloFark;
                 elo1 -= eloFark;
             }
