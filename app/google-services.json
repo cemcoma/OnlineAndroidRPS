@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "283473920750",
+    "project_id": "rps-cemtunay",
+    "storage_bucket": "rps-cemtunay.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:283473920750:android:3f5a999f7c76be971d29ff",
+        "android_client_info": {
+          "package_name": "com.cemcoma.rps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "283473920750-173alph9e6oeco6gu6o92ufj9d7bjctq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFRGsMT9XyH1_YFAYMsfefz8WVcW_fCdQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "283473920750-173alph9e6oeco6gu6o92ufj9d7bjctq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
