@@ -47,7 +47,12 @@ public class rpsActivity extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
+        //To make player wait
         waitView.setText("Playing the game...");
+        rockButton.setEnabled(false);
+        paperButton.setEnabled(false);
+        scissorButton.setEnabled(false);
+
 
         new Handler().postDelayed(new Runnable() { //For delay
             @Override
@@ -95,7 +100,12 @@ public class rpsActivity extends AppCompatActivity implements View.OnClickListen
                 eloView.setText("Your new elo is " + eloPlayer);
                 computerEloView.setText("Computer's new elo is " + eloComputer);
                 resultView.setText(str);
+
+                //To set everything to starting position
                 waitView.setText("");
+                rockButton.setEnabled(true);
+                paperButton.setEnabled(true);
+                scissorButton.setEnabled(true);
             }
         }, 1000);
 
