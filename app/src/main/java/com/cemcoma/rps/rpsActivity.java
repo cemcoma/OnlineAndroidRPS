@@ -12,10 +12,10 @@ import com.cemcoma.rps.rpsSystems.rockpaperscissors;
 import  com.cemcoma.rps.rpsSystems.elo;
 
 public class rpsActivity extends AppCompatActivity implements View.OnClickListener {
-    private int eloPlayer = 400;
-    private int eloComputer = 200;
+    private int eloPlayer = 1400;
+    private int eloComputer = 1200;
     private Button rockButton, paperButton, scissorButton;
-    private TextView resultView, computerChoiceTextView, eloView;
+    private TextView resultView, computerChoiceTextView, eloView, computerEloView;
     private ImageView computerChoiceImageView;
 
     @Override
@@ -29,6 +29,7 @@ public class rpsActivity extends AppCompatActivity implements View.OnClickListen
         resultView = (TextView) findViewById(R.id.resultView);
         computerChoiceTextView = (TextView) findViewById(R.id.computerChoiceTextView);
         eloView = (TextView) findViewById(R.id.eloView);
+        computerEloView = (TextView) findViewById(R.id.computerEloView);
 
         computerChoiceImageView = (ImageView) findViewById(R.id.computerChoiceImageView);
 
@@ -75,7 +76,10 @@ public class rpsActivity extends AppCompatActivity implements View.OnClickListen
         }
 
         eloPlayer = eloFromMatch.getFinalEloP1();
+        eloComputer = eloFromMatch.getFinalEloP2();
+
         eloView.setText("Your new elo is " + eloPlayer);
+        computerEloView.setText("Computer's new elo is " + eloComputer);
         resultView.setText(str);
     }
 }

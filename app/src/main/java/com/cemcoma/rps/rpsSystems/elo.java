@@ -14,39 +14,20 @@ public class elo {
     private void finalizeElos() {
         //TODO: finalze elo1 & elo2
         if(elo1 > 0 && elo2 > 0){
-            if(elo1 > elo2 && didP1Win == 1){
-                int eloFark = (elo1 - elo2)/10;
-                elo1 += eloFark;
-                elo2-= eloFark;
+            int eloDiff = elo1-elo2;
+            double p1WinProbability = 1/(1+ Math.pow(10,  -(eloDiff/400.0)));
+            double p2WinProbability = 1/(1+ Math.pow(10, (eloDiff/400.0)));
+            if(didP1Win == 1) {
+                elo1 = (int) (elo1 + 30* (1 - p1WinProbability));
+                elo2 = (int) (elo2 + 30* (0 - p2WinProbability));
+            } else if(didP1Win == 0) {
+                elo1 = (int) (elo1 + 30* (0.5 - p1WinProbability));
+                elo2 = (int) (elo2 + 30* (0.5 - p2WinProbability));
+            }else {
+                elo1 = (int) (elo1 + 40* (0 - p1WinProbability));
+                elo2 = (int) (elo2 + 30* (1 - p2WinProbability));
             }
-            else if(elo1 > elo2 && didP1Win == 0){
-                int eloFark = (elo1 - elo2)/30;
-                elo1 += eloFark;
-                elo2 -= eloFark;
-            }
-            else if(elo1 > elo2 && didP1Win == -1){
-                int eloFark = (elo1 - elo2)/150;
-                elo1 -= eloFark;
-                elo2 += eloFark;
 
-            }
-            else if(elo2 > elo1 && didP1Win == 1){
-                int eloFark = (elo2 - elo1)/10;
-                elo2 += eloFark;
-                elo1 -= eloFark;
-            }
-            else if(elo2 > elo1 && didP1Win == 0){
-                int eloFark = (elo2 - elo1)/30;
-                elo2 += eloFark;
-                elo1 -= eloFark;
-            }
-            else if(elo2 > elo1 && didP1Win == -1){
-                int eloFark = (elo1 - elo2)/150;
-                elo2 += eloFark;
-                elo1 -= eloFark;
-            }
-            
-            
         }
         else if(elo1 <= 0 || elo2 <= 0){
             System.out.println("elolar 0 ın altında");
