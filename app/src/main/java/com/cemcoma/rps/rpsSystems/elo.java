@@ -24,7 +24,7 @@ public class elo {
                 elo1 = (int) (elo1 + 30* (0.5 - p1WinProbability));
                 elo2 = (int) (elo2 + 30* (0.5 - p2WinProbability));
             }else {
-                elo1 = (int) (elo1 + 40* (0 - p1WinProbability));
+                elo1 = (int) (elo1 + 30* (0 - p1WinProbability));
                 elo2 = (int) (elo2 + 30* (1 - p2WinProbability));
             }
 
