@@ -14,11 +14,20 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
 
 public class registerActivity extends AppCompatActivity implements View.OnClickListener {
     private Button registerButton;
     private EditText usernameEditText ,emailEditText, passwordEditText;
     private FirebaseAuth mAuth;
+    private FirebaseUser mUser;
+    private FirebaseFirestore mFirestore;
+    private HashMap<String, Object> mData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +42,10 @@ public class registerActivity extends AppCompatActivity implements View.OnClickL
         passwordEditText = (EditText) findViewById(R.id.editTextTextPassword);
 
         mAuth = FirebaseAuth.getInstance();
+        mFirestore = FirebaseFirestore.getInstance();
+        //mReference = FirebaseDatabase.getInstance("https://rps-cemtunay-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
+
+
     }
 
     private void register() {
@@ -45,8 +58,19 @@ public class registerActivity extends AppCompatActivity implements View.OnClickL
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()) {
-                        Toast.makeText(registerActivity.this, "User has been created", Toast.LENGTH_SHORT).show();
+                         mUser = mAuth.getCurrentUser();
+
+                        //adding user properties
+                        mData = new HashMap<>();
+                        mData.put("name", username);
+                        mData.put("email", email);
+                        mData.put("password", password);
+                        mData.put("eloVsComputer", 1000); //starting elo is 1000 for vsComputer
+                        mData.put("eloVsPlayer", 400); //starting elo is 400 for vsPlayer
+
+                        mFirestore.collection("Users").document(mUser.getUid()).set(mData);
                         Intent intentToMenu = new Intent(registerActivity.this, menuActivity.class);
+                        intentToMenu.putExtra("userFirebase", mUser);
                         startActivity(intentToMenu);
                     } else {
                         Toast.makeText(registerActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();

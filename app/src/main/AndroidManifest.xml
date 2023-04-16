@@ -12,6 +12,9 @@
         android:theme="@style/Theme.Rps"
         tools:targetApi="31">
         <activity
+            android:name=".rpsOnlineActivity"
+            android:exported="false" />
+        <activity
             android:name=".registerActivity"
             android:exported="false" />
         <activity

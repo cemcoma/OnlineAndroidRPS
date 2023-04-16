@@ -60,7 +60,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                 public void onSuccess(AuthResult authResult) {
                     mUser = mAuth.getCurrentUser();
                     Intent intentToMenu= new Intent(loginActivity.this, menuActivity.class);
-                    intentToMenu.putExtra("user",mUser);
+                    intentToMenu.putExtra("userFirebase",mUser);
                     startActivity(intentToMenu);
                 }
             }).addOnFailureListener(this, new OnFailureListener() {

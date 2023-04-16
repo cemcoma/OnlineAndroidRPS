@@ -21,6 +21,20 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:id="@+id/playOnlineButton"
+        android:layout_width="224dp"
+        android:layout_height="69dp"
+        android:background="@android:drawable/dialog_holo_light_frame"
+        android:backgroundTint="#FFF0F0"
+        android:text="PLAY AGAINST PLAYERS"
+        app:layout_constraintBottom_toTopOf="@+id/playButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.939" />
+
+    <Button
         android:id="@+id/settingsButton"
         android:layout_width="226dp"
         android:layout_height="66dp"

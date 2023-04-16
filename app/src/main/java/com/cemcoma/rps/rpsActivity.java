@@ -2,29 +2,42 @@ package com.cemcoma.rps;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.cemcoma.rps.rpsSystems.rockpaperscissors;
 import  com.cemcoma.rps.rpsSystems.elo;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
 
 public class rpsActivity extends AppCompatActivity implements View.OnClickListener {
-    private int eloPlayer = 1400;
-    private int eloComputer = 1200;
+    private int eloPlayer;
+    private int eloComputer = 1000;
     private Button rockButton, paperButton, scissorButton;
     private TextView resultView, computerChoiceTextView, eloView, computerEloView, waitView;
     private ImageView computerChoiceImageView;
-
+    private FirebaseUser mUser;
+    private FirebaseFirestore mFirestore;
+    private DocumentReference mDocReference;
+    private HashMap<String, Object> eloHashMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rps);
+
+        Intent intent = getIntent();
+        eloPlayer = intent.getIntExtra("eloVsComputer",0);
+        mUser = intent.getParcelableExtra("userFirebase");
+
         rockButton = (Button) findViewById(R.id.rockButton);
         paperButton = (Button) findViewById(R.id.paperButton);
         scissorButton = (Button) findViewById(R.id.scissorsButton);
@@ -33,7 +46,7 @@ public class rpsActivity extends AppCompatActivity implements View.OnClickListen
         resultView = (TextView) findViewById(R.id.resultView);
         computerChoiceTextView = (TextView) findViewById(R.id.computerChoiceTextView);
         eloView = (TextView) findViewById(R.id.eloView);
-        eloView.setText("Your elo is" + eloPlayer);
+        eloView.setText("Your elo is " + eloPlayer);
         computerEloView = (TextView) findViewById(R.id.computerEloView);
         computerEloView.setText("Computer's elo is " + eloComputer);
 
@@ -42,6 +55,8 @@ public class rpsActivity extends AppCompatActivity implements View.OnClickListen
         rockButton.setOnClickListener(this);
         paperButton.setOnClickListener(this);
         scissorButton.setOnClickListener(this);
+
+        mFirestore = FirebaseFirestore.getInstance();
     }
 
 
@@ -93,7 +108,7 @@ public class rpsActivity extends AppCompatActivity implements View.OnClickListen
                 }
 
                 eloPlayer = eloFromMatch.getFinalEloP1();
-                eloComputer = eloFromMatch.getFinalEloP2();
+                //eloComputer = eloFromMatch.getFinalEloP2();
 
 
 
@@ -106,8 +121,16 @@ public class rpsActivity extends AppCompatActivity implements View.OnClickListen
                 rockButton.setEnabled(true);
                 paperButton.setEnabled(true);
                 scissorButton.setEnabled(true);
+                changeEloInDatabase();
             }
         }, 1000);
 
+    }
+
+    private void changeEloInDatabase() {
+        eloHashMap = new HashMap<>();
+        eloHashMap.put("eloVsComputer", eloPlayer);
+        mDocReference = mFirestore.collection("Users").document(mUser.getUid());
+        mDocReference.update(eloHashMap);
     }
 }
