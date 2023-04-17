@@ -20,7 +20,7 @@
         app:layout_constraintVertical_bias="0.477" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/challengeOthersButton"
         android:layout_width="wrap_content"
         android:layout_height="56dp"
         android:text="Challenge others"
@@ -35,6 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ONLINE MODE"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         app:layout_constraintBottom_toTopOf="@+id/challengeViewerButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,12 +45,12 @@
         app:layout_constraintVertical_bias="0.194" />
 
     <TextView
-        android:id="@+id/eloViewer"
+        android:id="@+id/userEloViewerOnliceActiivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/challengeViewerButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/label1" />
+        app:layout_constraintTop_toBottomOf="@+id/label1" />
 </androidx.constraintlayout.widget.ConstraintLayout>

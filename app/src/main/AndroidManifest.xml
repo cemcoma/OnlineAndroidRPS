@@ -12,10 +12,19 @@
         android:theme="@style/Theme.Rps"
         tools:targetApi="31">
         <activity
+            android:name=".playTypeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".rankingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".onlineActivities.challengesScreen"
+            android:exported="false" />
+        <activity
             android:name=".rpsOnlineActivity"
             android:exported="false" />
         <activity
-            android:name=".registerActivity"
+            android:name=".loginActivities.registerActivity"
             android:exported="false" />
         <activity
             android:name=".menuActivity"
@@ -24,7 +33,7 @@
             android:name=".rpsActivity"
             android:exported="false" />
         <activity
-            android:name=".loginActivity"
+            android:name=".loginActivities.loginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

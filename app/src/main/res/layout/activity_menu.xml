@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".loginActivity">
+    tools:context=".loginActivities.loginActivity">
 
     <Button
         android:id="@+id/playButton"
@@ -13,26 +13,12 @@
         android:layout_height="69dp"
         android:background="@android:drawable/dialog_holo_light_frame"
         android:backgroundTint="#FFF0F0"
-        android:text="PLAY AGAINST COMPUTERS"
+        android:text="PLAY RPS"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/playOnlineButton"
-        android:layout_width="224dp"
-        android:layout_height="69dp"
-        android:background="@android:drawable/dialog_holo_light_frame"
-        android:backgroundTint="#FFF0F0"
-        android:text="PLAY AGAINST PLAYERS"
-        app:layout_constraintBottom_toTopOf="@+id/playButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.939" />
 
     <Button
         android:id="@+id/settingsButton"
@@ -41,9 +27,20 @@
         android:background="@android:drawable/dialog_holo_light_frame"
         android:text="SETTINGS"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/rankingViewButton"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/rankingViewButton"
+        app:layout_constraintTop_toBottomOf="@+id/rankingViewButton"
+        app:layout_constraintVertical_bias="0.035" />
+
+    <Button
+        android:id="@+id/rankingViewButton"
+        android:layout_width="224dp"
+        android:layout_height="69dp"
+        android:background="@android:drawable/dialog_holo_light_frame"
+        android:text="RANKINGS"
         app:layout_constraintEnd_toEndOf="@+id/playButton"
         app:layout_constraintStart_toStartOf="@+id/playButton"
-        app:layout_constraintTop_toBottomOf="@+id/playButton"
-        app:layout_constraintVertical_bias="0.054" />
+        app:layout_constraintTop_toBottomOf="@+id/playButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

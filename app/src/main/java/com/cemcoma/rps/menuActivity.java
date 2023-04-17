@@ -9,19 +9,16 @@ import android.widget.Button;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class menuActivity extends AppCompatActivity implements View.OnClickListener {
-    private Button playButton, playOnlineButton;
+    private Button playButton, rankingViewButton;
     private String username;
     private int eloVsComputer, eloVsPlayer;
     private FirebaseUser mUser;
     private FirebaseFirestore mFirestore;
-    private DocumentReference mDocReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,43 +28,46 @@ public class menuActivity extends AppCompatActivity implements View.OnClickListe
         Intent loginIntent = getIntent();
 
         mUser = loginIntent.getParcelableExtra("userFirebase");
-        // mReference = FirebaseDatabase.getInstance("https://rps-cemtunay-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Users").child(mUser.getUid());
         mFirestore = FirebaseFirestore.getInstance();
 
         playButton = (Button) findViewById(R.id.playButton);
         playButton.setOnClickListener(this);
 
-        playOnlineButton = (Button) findViewById(R.id.playOnlineButton);
-        playOnlineButton.setOnClickListener(this);
-
         setValues();
+
+        rankingViewButton = (Button) findViewById(R.id.rankingViewButton);
+        rankingViewButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
+        setValues();
         if (view.getId() == playButton.getId()) {
-            Intent intentToPlayComputer = new Intent(menuActivity.this, rpsActivity.class);
-            intentToPlayComputer.putExtra("eloVsComputer", eloVsComputer);
-            intentToPlayComputer.putExtra("userFirebase", mUser);
-            startActivity(intentToPlayComputer);
-        } else if (view.getId() == playOnlineButton.getId()) {
-            Intent intentToPlayOnline = new Intent(menuActivity.this, rpsOnlineActivity.class);
-            intentToPlayOnline.putExtra("eloVsPlayer", eloVsPlayer);
-            intentToPlayOnline.putExtra("userFirebase", mUser);
-            intentToPlayOnline.putExtra("username", username);
-            startActivity(intentToPlayOnline);
+            Intent intentToPlay = new Intent(menuActivity.this, playTypeActivity.class);
+            intentToPlay.putExtra("username",username);
+            intentToPlay.putExtra("userFirebase",mUser);
+            intentToPlay.putExtra("eloVsComputer",eloVsComputer);
+            intentToPlay.putExtra("eloVsPlayer",eloVsPlayer);
+            startActivity(intentToPlay);
+
+        } else if (view.getId() == rankingViewButton.getId()) {
+            Intent intentToRankings = new Intent(menuActivity.this, rankingsActivity.class );
+            startActivity(intentToRankings);
         }
     }
 
     private void setValues (){
-        mDocReference = mFirestore.collection("Users").document(mUser.getUid());
-        mDocReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    username = (String) documentSnapshot.getData().get("name");
-                    eloVsComputer = (int) Math.round((long)documentSnapshot.getData().get("eloVsComputer"));
-                    eloVsPlayer = (int) Math.round((long)documentSnapshot.getData().get("eloVsPlayer"));
-            }
-        });
+       mFirestore.collection("Users").document(mUser.getUid()).get().addOnSuccessListener(this, new OnSuccessListener<DocumentSnapshot>() {
+           @Override
+           public void onSuccess(DocumentSnapshot documentSnapshot) {
+               if(documentSnapshot.exists()) {
+                   eloVsComputer = Integer.parseInt(documentSnapshot.get("eloVsComputer").toString());
+                   eloVsPlayer = Integer.parseInt(documentSnapshot.get("eloVsPlayer").toString());
+                   username = documentSnapshot.get("name").toString();
+               }
+           }
+       });
+
     }
+
 }

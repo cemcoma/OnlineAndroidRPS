@@ -12,7 +12,7 @@ public class elo {
     }
 
     private void finalizeElos() {
-        //TODO: finalze elo1 & elo2
+        // finalize elo1 & elo2
         if(elo1 > 0 && elo2 > 0){
             int eloDiff = elo1-elo2;
             double p1WinProbability = 1/(1+ Math.pow(10,  -(eloDiff/400.0)));
