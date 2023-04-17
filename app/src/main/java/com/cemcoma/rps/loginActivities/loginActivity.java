@@ -28,6 +28,16 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        mAuth = FirebaseAuth.getInstance();
+        mUser = mAuth.getCurrentUser();
+
+        if(mUser != null) { //checks if device has an user
+            Intent intentToMenu= new Intent(loginActivity.this, menuActivity.class);
+            intentToMenu.putExtra("userFirebase",mUser);
+            startActivity(intentToMenu);
+            loginActivity.this.finish();
+        }
+
 
         loginButton = (Button) findViewById(R.id.loginButton);
         loginButton.setOnClickListener(this);
@@ -37,7 +47,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         usernameEditText = (EditText) findViewById(R.id.editTextTextEmailAddress);
         passwordEditText = (EditText) findViewById(R.id.editTextTextPassword);
 
-        mAuth = FirebaseAuth.getInstance();
+
     }
 
     @Override
@@ -64,6 +74,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                     Intent intentToMenu= new Intent(loginActivity.this, menuActivity.class);
                     intentToMenu.putExtra("userFirebase",mUser);
                     startActivity(intentToMenu);
+                    loginActivity.this.finish();
                 }
             }).addOnFailureListener(this, new OnFailureListener() {
                 @Override

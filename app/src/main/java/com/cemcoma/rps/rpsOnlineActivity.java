@@ -42,7 +42,7 @@ public class rpsOnlineActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(View view) {
         if(view.getId() == challengesButton.getId()) {
-            Intent intentToChallenges = new Intent(rpsOnlineActivity.this, challengesScreen.class);
+            Intent intentToChallenges = new Intent(rpsOnlineActivity.this, com.cemcoma.rps.onlineActivities.challengesScreen.class);
             intentToChallenges.putExtra("eloVsPlayer",eloP1);
             intentToChallenges.putExtra("userFirebase", mUser);
             intentToChallenges.putExtra("username",username);
