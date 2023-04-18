@@ -128,9 +128,11 @@ public class rpsActivity extends AppCompatActivity implements View.OnClickListen
     }
 
     private void changeEloInDatabase() {
-        eloHashMap = new HashMap<>();
-        eloHashMap.put("eloVsComputer", eloPlayer);
-        mDocReference = mFirestore.collection("Users").document(mUser.getUid());
-        mDocReference.update(eloHashMap);
+        if(eloPlayer > 0) {
+            eloHashMap = new HashMap<>();
+            eloHashMap.put("eloVsComputer", eloPlayer);
+            mDocReference = mFirestore.collection("Users").document(mUser.getUid());
+            mDocReference.update(eloHashMap);
+        }
     }
 }
