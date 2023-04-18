@@ -64,6 +64,7 @@ public class registerActivity extends AppCompatActivity implements View.OnClickL
                         mData.put("password", password);
                         mData.put("eloVsComputer", 1000); //starting elo is 1000 for vsComputer
                         mData.put("eloVsPlayer", 400); //starting elo is 400 for vsPlayer
+                        mData.put("UID", mUser.getUid());
 
                         mFirestore.collection("Users").document(mUser.getUid()).set(mData);
                         Intent intentToMenu = new Intent(registerActivity.this, menuActivity.class);

@@ -12,6 +12,9 @@
         android:theme="@style/Theme.Rps"
         tools:targetApi="31">
         <activity
+            android:name=".HofActivity"
+            android:exported="false" />
+        <activity
             android:name=".onlineActivities.challengeOthersScreen"
             android:exported="false" />
         <activity

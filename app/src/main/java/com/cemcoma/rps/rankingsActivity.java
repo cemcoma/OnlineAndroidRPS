@@ -2,8 +2,11 @@ package com.cemcoma.rps;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -15,6 +18,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 public class rankingsActivity extends AppCompatActivity {
     private TextView winnerText;
     private FirebaseFirestore mFirestore;
+    private Button hofButton;
     private Query query;
 
     @Override
@@ -27,6 +31,15 @@ public class rankingsActivity extends AppCompatActivity {
         winnerText =(TextView) findViewById(R.id.winnerTextView);
 
         query = mFirestore.collection("Users").orderBy("eloVsComputer", Query.Direction.DESCENDING).limit(10);
+
+        hofButton = (Button) findViewById(R.id.HoFButton);
+        hofButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(rankingsActivity.this ,HofActivity.class);
+                startActivity(intent);
+            }
+        });
 
         query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             String str = "";

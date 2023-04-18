@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.cemcoma.rps.onlineActivities.challengeOthersScreen;
 import com.cemcoma.rps.onlineActivities.challengesScreen;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -48,7 +49,11 @@ public class rpsOnlineActivity extends AppCompatActivity implements View.OnClick
             intentToChallenges.putExtra("username",username);
             startActivity(intentToChallenges);
         } else if (view.getId() == challengeOthersButton.getId()) {
-           //TODO: Intent intentToChallengeOthers = new Intent(rpsOnlineActivity.this, challengeOthersScreen.class);
+            Intent intentToChallengeOthers = new Intent(rpsOnlineActivity.this, challengeOthersScreen.class);
+            intentToChallengeOthers.putExtra("eloVsPlayer",eloP1);
+            intentToChallengeOthers.putExtra("userFirebase", mUser);
+            intentToChallengeOthers.putExtra("username",username);
+            startActivity(intentToChallengeOthers);
         }
     }
 }
