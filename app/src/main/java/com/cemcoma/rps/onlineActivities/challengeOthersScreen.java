@@ -6,7 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.cemcoma.rps.R;
@@ -26,6 +29,8 @@ public class challengeOthersScreen extends AppCompatActivity implements View.OnC
     private FirebaseFirestore mFirestore;
     private EditText challengeOthersEditText;
     private Button challengeButton;
+    private RadioButton rockButton, paperButton, scissorsButton;
+    private RadioGroup rpsGroup;
     private challengeMaker challengeMaker;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,12 @@ public class challengeOthersScreen extends AppCompatActivity implements View.OnC
         challengeOthersEditText = (EditText) findViewById(R.id.challengeOthersEditText);
         challengeButton =(Button) findViewById(R.id.challengeButton);
         challengeButton.setOnClickListener(this);
+
+        rockButton = (RadioButton) findViewById(R.id.rockRadioButton);
+        paperButton = (RadioButton) findViewById(R.id.paperRadioButton);
+        scissorsButton = (RadioButton) findViewById(R.id.scissorsRadioButton);
+
+        rockButton.setChecked(true);
     }
 
     @Override
@@ -52,13 +63,23 @@ public class challengeOthersScreen extends AppCompatActivity implements View.OnC
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 int i = 0;
                 for(QueryDocumentSnapshot docSnap : queryDocumentSnapshots) {
-                    challengeMaker = new challengeMaker(mUser.getUid(), docSnap.get("UID").toString(), 0);
+                    challengeMaker = new challengeMaker(mUser.getUid(), docSnap.get("UID").toString(), getPlayerSelection());
                     i++;
                 }
                 Toast.makeText(challengeOthersScreen.this, i + " challenges has been created.", Toast.LENGTH_SHORT).show();
 
             }
         });
-
+        finish();
     }
+    private int getPlayerSelection() {
+        if(rockButton.isChecked()) {
+            return 0;
+        }else if(paperButton.isChecked()) {
+            return 1;
+        } else {
+            return 2;
+        }
+    }
+
 }

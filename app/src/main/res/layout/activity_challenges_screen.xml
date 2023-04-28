@@ -7,14 +7,57 @@
     android:background="@color/background"
     tools:context=".onlineActivities.challengesScreen">
 
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="398dp"
+        android:layout_height="157dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintStart_toStartOf="@+id/challengesTextView"
+        app:layout_constraintTop_toTopOf="@+id/challengesTextView">
+
+        <RadioButton
+            android:id="@+id/rockRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rock"
+            android:textSize="18sp"
+            tools:layout_conversion_absoluteHeight="48dp"
+            tools:layout_conversion_absoluteWidth="100dp"
+            tools:layout_editor_absoluteX="33dp"
+            tools:layout_editor_absoluteY="26dp" />
+
+        <RadioButton
+            android:id="@+id/paperRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Paper"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            tools:layout_conversion_absoluteHeight="48dp"
+            tools:layout_conversion_absoluteWidth="100dp"
+            tools:layout_editor_absoluteX="154dp"
+            tools:layout_editor_absoluteY="26dp" />
+
+        <RadioButton
+            android:id="@+id/scissorsRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Scissors"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            tools:layout_conversion_absoluteHeight="48dp"
+            tools:layout_conversion_absoluteWidth="100dp"
+            tools:layout_editor_absoluteX="272dp"
+            tools:layout_editor_absoluteY="26dp" />
+    </RadioGroup>
+
     <TextView
         android:id="@+id/challengesTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_width="250dp"
+        android:layout_height="200dp"
         android:text="Waiting for content.."
-        app:layout_constraintEnd_toEndOf="@+id/challengeSearcherEditText"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/challengeSearcherEditText"
         app:layout_constraintTop_toBottomOf="@+id/challengeSearcherEditText" />
 
     <Button
